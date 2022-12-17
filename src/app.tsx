@@ -1,4 +1,4 @@
-import { doc, getDoc, onSnapshot, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { useEffect, useRef, useState } from "preact/hooks";
 import "./app.css";
 import { firestore } from "./firebase";
@@ -56,15 +56,7 @@ export function App() {
       isLoading.current = false;
     };
 
-    const unsub = onSnapshot(doc(firestore, "text", "textDoc"), (doc) => {
-      if (doc.exists()) {
-        setValue(doc.data()?.value ?? "");
-      }
-    });
-
     onLoad();
-
-    return unsub;
   }, []);
 
   return (
