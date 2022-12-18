@@ -141,8 +141,10 @@ export function App() {
             display: "flex",
             flex: 1,
             overflowY: "hidden",
+            overflowX: "auto",
             resize: "none",
-            color: "#fff"
+            color: "#fff",
+            whiteSpace: "nowrap",
           }}
         />
       </div>
