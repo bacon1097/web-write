@@ -1,4 +1,4 @@
-import { useState } from "preact/hooks";
+import { useCallback, useState } from "preact/hooks";
 import { JSX } from "preact/jsx-runtime";
 import "./index.css";
 
@@ -7,6 +7,14 @@ export interface AuthedProps extends JSX.HTMLAttributes<HTMLDivElement> {}
 const Authed = ({ children, ...props }: AuthedProps): JSX.Element => {
   const [authed, setAuthed] = useState(false);
   const [codeInput, setCodeInput] = useState("");
+
+  const onSubmit = useCallback((code: string) => {
+    if (code === "1097") {
+      setAuthed(true);
+    } else {
+      alert("Incorrect code");
+    }
+  }, []);
 
   return authed ? (
     <>{children}</>
@@ -21,7 +29,7 @@ const Authed = ({ children, ...props }: AuthedProps): JSX.Element => {
         backgroundColor: "rgba(0, 0, 0, 0.2)",
       }}
     >
-      <div
+      <form
         style={{
           display: "flex",
           borderRadius: 15,
@@ -30,12 +38,20 @@ const Authed = ({ children, ...props }: AuthedProps): JSX.Element => {
           overflow: "hidden",
           flexDirection: "column",
         }}
+        onSubmit={(e) => {
+          e.preventDefault();
+          onSubmit(codeInput);
+        }}
       >
         <div
           style={{ margin: "15px", display: "flex", flexDirection: "column" }}
         >
           <span
-            style={{ marginBottom: 10, fontSize: "1.2em", textAlign: "center" }}
+            style={{
+              marginBottom: 10,
+              fontSize: "1.2em",
+              textAlign: "center",
+            }}
           >
             Enter code:
           </span>
@@ -46,21 +62,13 @@ const Authed = ({ children, ...props }: AuthedProps): JSX.Element => {
             }}
             type="password"
             style={{ textAlign: "center" }}
+            autoFocus
           />
         </div>
-        <div
-          className="button"
-          onClick={() => {
-            if (codeInput === "1097") {
-              setAuthed(true);
-            } else {
-              alert("Incorrect code");
-            }
-          }}
-        >
+        <input type="submit" className="button">
           Submit
-        </div>
-      </div>
+        </input>
+      </form>
     </div>
   );
 };

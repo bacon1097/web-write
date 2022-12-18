@@ -16,12 +16,8 @@ const app = initializeApp(firebaseConfig);
 
 const firestore = getFirestore(app);
 
-if (
-  window.location.hostname === "localhost" ||
-  window.location.hostname === "127.0.0.1"
-) {
+if (import.meta.env.DEV) {
   connectFirestoreEmulator(firestore, "localhost", 8080);
 }
 
 export { firestore };
-
