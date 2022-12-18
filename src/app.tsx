@@ -1,6 +1,7 @@
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { useEffect, useRef, useState } from "preact/hooks";
 import "./app.css";
+import Authed from "./components/Authed";
 import LineNumber from "./components/LineNumber";
 import { firestore } from "./firebase";
 
@@ -67,76 +68,78 @@ export function App() {
   }, []);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flex: 1,
-        flexDirection: "column",
-      }}
-    >
+    <Authed>
       <div
         style={{
-          backgroundColor: "var(--background-light)",
-          position: "sticky",
-          top: 0,
           display: "flex",
-          justifyContent: "center",
+          flex: 1,
+          flexDirection: "column",
         }}
       >
-        <span
-          style={{
-            color: "var(--text-light)",
-            fontSize: "0.8em",
-            padding: "0.2em 0",
-          }}
-        >
-          {saved ? "Saved" : "..."}
-        </span>
-      </div>
-      <div style={{ display: "flex", flexDirection: "row", flex: 1 }}>
         <div
           style={{
-            display: "flex",
-            width: "fit-content",
-            flexDirection: "column",
             backgroundColor: "var(--background-light)",
-            marginRight: "0.5em",
-            paddingTop: "0.5rem",
-            boxSizing: "border-box",
-            alignSelf: "stretch",
-            minWidth: "2.5em",
+            position: "sticky",
+            top: 0,
+            display: "flex",
+            justifyContent: "center",
           }}
         >
-          <LineNumber ref={lineElem} number={1} />
-          {Array.from({ length: textAreaLineCount - 1 }, (_, i) => i + 2).map(
-            (i) => (
-              <LineNumber key={i} number={i} />
-            )
-          )}
+          <span
+            style={{
+              color: "var(--text-light)",
+              fontSize: "0.8em",
+              padding: "0.2em 0",
+            }}
+          >
+            {saved ? "Saved" : "..."}
+          </span>
         </div>
-        <textarea
-          className="textarea"
-          value={value}
-          onInput={(e) => {
-            setValue(e.currentTarget.value ?? "");
-          }}
-          type="text"
-          style={{
-            lineHeight: "1.2em",
-            fontSize: "1.2em",
-            paddingTop: "0.5rem",
-            boxSizing: "border-box",
-            backgroundColor: "var(--background)",
-            display: "flex",
-            flex: 1,
-            overflowY: "hidden",
-            overflowX: "auto",
-            resize: "none",
-            color: "#fff",
-            whiteSpace: "pre",
-          }}
-        />
+        <div style={{ display: "flex", flexDirection: "row", flex: 1 }}>
+          <div
+            style={{
+              display: "flex",
+              width: "fit-content",
+              flexDirection: "column",
+              backgroundColor: "var(--background-light)",
+              marginRight: "0.5em",
+              paddingTop: "0.5rem",
+              boxSizing: "border-box",
+              alignSelf: "stretch",
+              minWidth: "2.5em",
+            }}
+          >
+            <LineNumber ref={lineElem} number={1} />
+            {Array.from({ length: textAreaLineCount - 1 }, (_, i) => i + 2).map(
+              (i) => (
+                <LineNumber key={i} number={i} />
+              )
+            )}
+          </div>
+          <textarea
+            className="textarea"
+            value={value}
+            onInput={(e) => {
+              setValue(e.currentTarget.value ?? "");
+            }}
+            type="text"
+            style={{
+              lineHeight: "1.2em",
+              fontSize: "1.2em",
+              paddingTop: "0.5rem",
+              boxSizing: "border-box",
+              backgroundColor: "var(--background)",
+              display: "flex",
+              flex: 1,
+              overflowY: "hidden",
+              overflowX: "auto",
+              resize: "none",
+              color: "#fff",
+              whiteSpace: "pre",
+            }}
+          />
+        </div>
       </div>
-    </div>
+    </Authed>
   );
 }

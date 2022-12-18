@@ -77,3 +77,12 @@ button:focus-visible {
   display: flex;
   flex: 1;
 }
+
+input {
+  border: none;
+  background: var(--background);
+  outline: none;
+  font-family: inherit;
+  border-radius: 5px;
+  padding: 0.5em 1em;
+}
