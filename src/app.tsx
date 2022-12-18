@@ -60,7 +60,7 @@ export function App() {
   }, []);
 
   return (
-    <div style={{ width: "100vw" }}>
+    <div style={{ width: "100%" }}>
       <div
         style={{
           backgroundColor: "#272727",
