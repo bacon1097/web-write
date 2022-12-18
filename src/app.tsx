@@ -123,6 +123,7 @@ export function App() {
               setValue(e.currentTarget.value ?? "");
             }}
             type="text"
+            autoFocus
             style={{
               lineHeight: "1.2em",
               fontSize: "1.2em",
