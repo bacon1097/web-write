@@ -142,6 +142,7 @@ export function App() {
             flex: 1,
             overflowY: "hidden",
             resize: "none",
+            color: "#fff"
           }}
         />
       </div>

@@ -33,6 +33,7 @@ body {
   margin: 0;
   overflow-y: auto;
   min-height: 100vh;
+  background-color: var(--background);
 }
 
 h1 {

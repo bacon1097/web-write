@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "emulate": "firebase emulators:start --only firestore"
+    "emulate": "firebase emulators:start --only firestore",
+    "deploy": "yarn build && firebase deploy --only hosting"
   },
   "dependencies": {
     "firebase": "^9.15.0",
