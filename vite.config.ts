@@ -15,7 +15,7 @@ export default defineConfig({
         name: "Web Write",
         short_name: "Web Write",
         description: "A simple, offline-first, markdown editor.",
-        theme_color: "#FFFFFF",
+        theme_color: "#242424",
         icons: [
           {
             src: "vite-512x512.svg",
