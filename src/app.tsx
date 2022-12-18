@@ -63,12 +63,11 @@ export function App() {
     <div style={{ width: "100%" }}>
       <div
         style={{
-          backgroundColor: "#272727",
+          backgroundColor: "var(--background-light)",
           position: "sticky",
           top: 0,
           display: "flex",
           justifyContent: "center",
-          marginBottom: "0.2em",
         }}
       >
         <span
@@ -87,6 +86,10 @@ export function App() {
             display: "flex",
             width: "fit-content",
             flexDirection: "column",
+            backgroundColor: "var(--background-light)",
+            marginRight: "0.5em",
+            paddingTop: "0.5rem",
+            boxSizing: "border-box",
           }}
         >
           {Array.from({ length: 100 }, (_, i) => i + 1).map((i) => (
@@ -105,6 +108,7 @@ export function App() {
           ))}
         </div>
         <textarea
+          className="textarea"
           value={value}
           onInput={(e) => {
             console.log(e);
@@ -116,6 +120,8 @@ export function App() {
             fontSize: "1.2em",
             width: "100%",
             height: "100vh",
+            paddingTop: "0.5rem",
+            boxSizing: "border-box",
           }}
         />
       </div>

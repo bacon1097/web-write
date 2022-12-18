@@ -1,5 +1,5 @@
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Chivo Mono', monospace;
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
@@ -14,7 +14,8 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 
-  --text-light: #343434;
+  --text-light: #3e3e3e;
+  --background-light: #272727;
 }
 
 a {
