@@ -1,4 +1,8 @@
 :root {
+  --text-light: #3e3e3e;
+  --background: #242424;
+  --background-light: #272727;
+
   font-family: 'Chivo Mono', monospace;
   font-size: 16px;
   line-height: 24px;
@@ -6,16 +10,13 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: var(--background);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-
-  --text-light: #3e3e3e;
-  --background-light: #272727;
 }
 
 a {
@@ -28,10 +29,9 @@ a:hover {
 }
 
 body {
-  margin: 0;
   display: flex;
-  place-items: center;
-  min-width: 320px;
+  margin: 0;
+  overflow-y: auto;
   min-height: 100vh;
 }
 
@@ -73,5 +73,6 @@ button:focus-visible {
 }
 
 #app {
-  width: 100%;
+  display: flex;
+  flex: 1;
 }

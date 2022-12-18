@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "emulate": "firebase emulators:start --only firestore"
   },
   "dependencies": {
     "firebase": "^9.15.0",

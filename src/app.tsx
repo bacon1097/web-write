@@ -1,6 +1,7 @@
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { useEffect, useRef, useState } from "preact/hooks";
 import "./app.css";
+import LineNumber from "./components/LineNumber";
 import { firestore } from "./firebase";
 
 export function App() {
@@ -8,8 +9,15 @@ export function App() {
   const [saved, setSaved] = useState(true);
   const [debouncedValue, setDebouncedValue] = useState("");
   const isLoading = useRef(true);
+  const lineElem = useRef<HTMLDivElement>(null);
+  const [textAreaLineCount, setTextAreaLineCount] = useState(1);
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
 
   useEffect(() => {
+    // Count the number of "\n" in the text
+    const count = (value.match(/\n/g) || []).length;
+    setTextAreaLineCount(count + 1);
+
     if (value === debouncedValue) return;
 
     setSaved(false);
@@ -56,11 +64,27 @@ export function App() {
       isLoading.current = false;
     };
 
+    window.addEventListener("resize", () => {
+      setWindowHeight(window.innerHeight);
+    });
+
     onLoad();
+
+    return () => {
+      window.removeEventListener("resize", () => {
+        setWindowHeight(window.innerHeight);
+      });
+    };
   }, []);
 
   return (
-    <div style={{ width: "100%" }}>
+    <div
+      style={{
+        display: "flex",
+        flex: 1,
+        flexDirection: "column",
+      }}
+    >
       <div
         style={{
           backgroundColor: "var(--background-light)",
@@ -80,7 +104,7 @@ export function App() {
           {saved ? "Saved" : "..."}
         </span>
       </div>
-      <div style={{ display: "flex", flexDirection: "row" }}>
+      <div style={{ display: "flex", flexDirection: "row", flex: 1 }}>
         <div
           style={{
             display: "flex",
@@ -90,38 +114,34 @@ export function App() {
             marginRight: "0.5em",
             paddingTop: "0.5rem",
             boxSizing: "border-box",
+            alignSelf: "stretch",
+            minWidth: "2.5em",
           }}
         >
-          {Array.from({ length: 100 }, (_, i) => i + 1).map((i) => (
-            <div
-              key={i}
-              style={{
-                color: "var(--text-light)",
-                display: "flex",
-                lineHeight: "1.2em",
-                fontSize: "1.2em",
-                margin: "0 auto",
-              }}
-            >
-              {i}
-            </div>
-          ))}
+          <LineNumber ref={lineElem} number={1} />
+          {Array.from({ length: textAreaLineCount - 1 }, (_, i) => i + 2).map(
+            (i) => (
+              <LineNumber key={i} number={i} />
+            )
+          )}
         </div>
         <textarea
           className="textarea"
           value={value}
           onInput={(e) => {
-            console.log(e);
             setValue(e.currentTarget.value ?? "");
           }}
           type="text"
           style={{
             lineHeight: "1.2em",
             fontSize: "1.2em",
-            width: "100%",
-            height: "100vh",
             paddingTop: "0.5rem",
             boxSizing: "border-box",
+            backgroundColor: "var(--background)",
+            display: "flex",
+            flex: 1,
+            overflowY: "hidden",
+            resize: "none",
           }}
         />
       </div>
