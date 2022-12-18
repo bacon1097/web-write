@@ -11,7 +11,6 @@ export function App() {
   const isLoading = useRef(true);
   const lineElem = useRef<HTMLDivElement>(null);
   const [textAreaLineCount, setTextAreaLineCount] = useState(1);
-  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
 
   useEffect(() => {
     // Count the number of "\n" in the text
@@ -64,17 +63,7 @@ export function App() {
       isLoading.current = false;
     };
 
-    window.addEventListener("resize", () => {
-      setWindowHeight(window.innerHeight);
-    });
-
     onLoad();
-
-    return () => {
-      window.removeEventListener("resize", () => {
-        setWindowHeight(window.innerHeight);
-      });
-    };
   }, []);
 
   return (
@@ -144,7 +133,7 @@ export function App() {
             overflowX: "auto",
             resize: "none",
             color: "#fff",
-            whiteSpace: "nowrap",
+            whiteSpace: "pre",
           }}
         />
       </div>
