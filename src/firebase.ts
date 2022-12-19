@@ -21,3 +21,4 @@ if (import.meta.env.DEV) {
 }
 
 export { firestore };
+

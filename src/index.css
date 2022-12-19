@@ -34,6 +34,7 @@ body {
   overflow-y: auto;
   min-height: 100vh;
   background-color: var(--background);
+  color: #fff;
 }
 
 h1 {

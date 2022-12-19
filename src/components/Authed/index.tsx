@@ -63,6 +63,7 @@ const Authed = ({ children, ...props }: AuthedProps): JSX.Element => {
             type="password"
             style={{ textAlign: "center" }}
             autoFocus
+            autoComplete="password"
           />
         </div>
         <input type="submit" className="button">
