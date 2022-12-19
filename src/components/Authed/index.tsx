@@ -2,22 +2,29 @@ import { useCallback, useState } from "preact/hooks";
 import { JSX } from "preact/jsx-runtime";
 import "./index.css";
 
-export interface AuthedProps extends JSX.HTMLAttributes<HTMLDivElement> {}
+export interface AuthedProps extends JSX.HTMLAttributes<HTMLDivElement> {
+  auth: () => JSX.Element;
+  unauth: () => JSX.Element;
+}
 
-const Authed = ({ children, ...props }: AuthedProps): JSX.Element => {
-  const [authed, setAuthed] = useState(false);
+export type AuthState = "none" | "authed" | "unauthed";
+
+const Authed = ({ auth, unauth, ...props }: AuthedProps): JSX.Element => {
+  const [authed, setAuthed] = useState<AuthState>("none");
   const [codeInput, setCodeInput] = useState("");
 
   const onSubmit = useCallback((code: string) => {
     if (code === "1097") {
-      setAuthed(true);
+      setAuthed("authed");
     } else {
       alert("Incorrect code");
     }
   }, []);
 
-  return authed ? (
-    <>{children}</>
+  return authed === "authed" ? (
+    auth()
+  ) : authed === "unauthed" ? (
+    unauth()
   ) : (
     <div
       {...props}
@@ -61,14 +68,29 @@ const Authed = ({ children, ...props }: AuthedProps): JSX.Element => {
               setCodeInput(e.currentTarget.value);
             }}
             type="password"
-            style={{ textAlign: "center" }}
+            style={{ textAlign: "center", borderRadius: 5 }}
             autoFocus
             autoComplete="password"
           />
         </div>
-        <input type="submit" className="button">
-          Submit
-        </input>
+        <div style={{ display: "flex", flexDirection: "row" }}>
+          <input
+            type="submit"
+            className="button"
+            style={{ flex: 1, borderRight: "1px solid var(--background)" }}
+            value="Submit"
+          />
+          <input
+            type="submit"
+            className="button"
+            style={{ flex: 1 }}
+            value="Public"
+            onClick={(e) => {
+              e.preventDefault();
+              setAuthed("unauthed");
+            }}
+          />
+        </div>
       </form>
     </div>
   );

@@ -84,6 +84,10 @@ input {
   background: var(--background);
   outline: none;
   font-family: inherit;
-  border-radius: 5px;
   padding: 0.5em 1em;
+  color: #fff;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
 }
