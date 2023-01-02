@@ -1,6 +1,5 @@
 import { initializeApp } from "firebase/app";
 import { connectFirestoreEmulator, getFirestore } from "firebase/firestore";
-// TODO: Add SDKs for Firebase products that you want to use
 
 const firebaseConfig = {
   apiKey: "AIzaSyDfN6GfM5EEjjMdjrFnEF2VafU6HAf5ahU",
