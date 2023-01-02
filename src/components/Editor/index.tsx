@@ -15,6 +15,7 @@ const Editor = ({ docId }: EditorProps): JSX.Element => {
   const isLoading = useRef(true);
   const lineElem = useRef<HTMLDivElement>(null);
   const [textAreaLineCount, setTextAreaLineCount] = useState(1);
+  const textArea = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     // Count the number of "\n" in the text
@@ -70,6 +71,12 @@ const Editor = ({ docId }: EditorProps): JSX.Element => {
     onLoad();
   }, []);
 
+  useEffect(() => {
+    if (textArea.current) {
+      textArea.current.focus();
+    }
+  }, []);
+
   return (
     <div
       style={{
@@ -119,13 +126,13 @@ const Editor = ({ docId }: EditorProps): JSX.Element => {
           )}
         </div>
         <textarea
+          ref={textArea}
           className="textarea"
           value={value}
           onInput={(e) => {
             setValue(e.currentTarget.value ?? "");
           }}
           type="text"
-          autoFocus
           style={{
             lineHeight: "1.2em",
             fontSize: "1.2em",
